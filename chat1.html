@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>A</h1>
+    <h1>请输入消息：</h1>
+    <input id="input" type="text">
+    <button id='b1'>发送</button>
+    <div id="msg"></div>
+    <script>
+        var ws = new WebSocket('ws://192.168.1.203:8001')
+        ws.onopen=function(){
+            console.log("连接服务器成功")
+            ws.send("A online1");
+        }
+        ws.onerror=function(){
+            console.log("连接服务器异常")
+        }
+        ws.onclose=function(){
+            console.log("关闭服务器")
+        }
+       
+        ws.onmessage=function(e){
+            b1.onclick=function(){
+                ws.send(input.value+'1')
+                input.value=''
+            }
+            var time=new Date().toLocaleTimeString()
+            msg.innerHTML+=time+'<br/>'+e.data+'<br/>'
+        }
+    </script>
+</body>
+</html>
