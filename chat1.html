@@ -14,17 +14,21 @@
     <div id="msg"></div>
     <script>
         var ws = new WebSocket('ws://192.168.1.203:8001')
+        //连接成功时
         ws.onopen=function(){
             console.log("连接服务器成功")
+            //发送A 已上线，1为状态码
             ws.send("A online1");
         }
+        //连接异常时
         ws.onerror=function(){
             console.log("连接服务器异常")
         }
+        //关闭连接时
         ws.onclose=function(){
             console.log("关闭服务器")
         }
-       
+       //接收到消息时
         ws.onmessage=function(e){
             b1.onclick=function(){
                 ws.send(input.value+'1')

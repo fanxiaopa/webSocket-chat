@@ -20,18 +20,18 @@ var server = ws.createServer(function(conn){
             var code=str.substr(-1,1)
             str=str.slice(0,-1)
             console.log(code)
-            
+            //判断最后一位状态码，分辨出是谁发的消息
             if(code==='1'){
+                //A发来的消息
                 chat1.sendText("--->A说 :"+str);
                 chat2.sendText("--->A说 :"+str);
             }else{
+                //B发来的消息
                 chat1.sendText("--->B说 :"+str);
                 chat2.sendText("--->B说 :"+str);
             }
            
         }
-
-       // conn.sendText(str)
     })
     conn.on("close", function (code, reason) {
         console.log("关闭连接")
